@@ -6,6 +6,7 @@ import com.pinhobrunodev.course.entities.User;
 
 
 // Responsavel por fazer as operacoes com a entidade
+
 public interface UserRepository extends JpaRepository<User, Long> {
 
 }
