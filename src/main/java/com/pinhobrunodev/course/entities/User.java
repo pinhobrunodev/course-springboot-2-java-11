@@ -8,10 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+  
 
 @Entity
 //Alterando o nome da tablea
@@ -30,6 +31,8 @@ public class User implements Serializable {
 	
 	// Um Cliente pode ter varios pedidos
 	// Setamos o nome do atributo que esta no outro lado da associacao EX: Client client
+	// Associacao de mao dupla, para evitar isso, vamos usar o @JsonIgnore em um dos 2 lados pelo menos
+	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<Order>();
 	
