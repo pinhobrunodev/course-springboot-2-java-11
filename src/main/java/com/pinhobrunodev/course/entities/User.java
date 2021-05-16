@@ -1,14 +1,21 @@
 package com.pinhobrunodev.course.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 @Entity
+//Alterando o nome da tablea
+@Table(name = "tb_user")
 public class User implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -20,6 +27,11 @@ public class User implements Serializable {
 	private String email;
 	private String fone;
 	private String password;
+	
+	// Um Cliente pode ter varios pedidos
+	// Setamos o nome do atributo que esta no outro lado da associacao EX: Client client
+	@OneToMany(mappedBy = "client")
+	private List<Order> orders = new ArrayList<Order>();
 	
 	// Usamos vazio geralmente
 	public User(){
@@ -62,6 +74,9 @@ public class User implements Serializable {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public List<Order> getOrders() {
+		return orders;
 	}
 	/*
 	 * Por padrao colocamos somente Hashcode & Equals com o ID
