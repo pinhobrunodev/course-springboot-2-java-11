@@ -71,7 +71,7 @@ public class Order implements Serializable {
 		return client;
 	}
 
-	// Se existe retorna um orderStatus
+	// Se existe o valor inteiro passado retorna um orderStatus
 	public OrderStatus getOrderStatus() {
 		return OrderStatus.valueOf(orderStatus);
 	}
