@@ -80,6 +80,15 @@ public class TesteConfig implements CommandLineRunner {
 		pr.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
 		ur.saveAll(Arrays.asList(u1, u2));
 		or.saveAll(Arrays.asList(o1,o2,o3));
+		//Associando objetos (Product && Category)
+		p1.getCategories().add(cat2);
+		p2.getCategories().add(cat1);
+		p2.getCategories().add(cat3);
+		p3.getCategories().add(cat3);
+		p4.getCategories().add(cat3);
+		p5.getCategories().add(cat2);
+		//Salvando novamente o produto , porem com as associacoes
+		pr.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
 	}
 
 }

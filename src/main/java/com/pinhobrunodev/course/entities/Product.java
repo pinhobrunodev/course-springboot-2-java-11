@@ -8,8 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "tb_product")
@@ -29,9 +31,17 @@ public class Product implements Serializable {
 	// ocorrencia de uma categoria
 	// Instanciamos para garantir que a minha colecao nao comeco com valur null
 	// Usamos o HashSet pois e uma classe correspondente a interface SET
-	
-	// Impedir que jpa interprete
-	@Transient
+
+	// Impedir que jpa interprete => @Transient
+
+	@ManyToMany
+	// Informo qual nome da tabela e quais serao as chaves estragengeiras que vao
+	// associar tb_produto com tb_categoria
+	@JoinTable(name = "tb_product_category",
+			// chave estrangeira da entidade product
+			joinColumns = @JoinColumn(name = "product_id"),
+			// chave estrangeira da entidade category
+			inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private Set<Category> categories = new HashSet<Category>();
 
 	public Product() {
