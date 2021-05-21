@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.pinhobrunodev.course.entities.Category;
 import com.pinhobrunodev.course.entities.Order;
+import com.pinhobrunodev.course.entities.OrderItem;
 import com.pinhobrunodev.course.entities.Product;
 import com.pinhobrunodev.course.entities.User;
 import com.pinhobrunodev.course.entities.enums.OrderStatus;
 import com.pinhobrunodev.course.repositories.CategoryRepository;
+import com.pinhobrunodev.course.repositories.OrderItemRepository;
 import com.pinhobrunodev.course.repositories.OrderRepository;
 import com.pinhobrunodev.course.repositories.ProductRepository;
 import com.pinhobrunodev.course.repositories.UserRepository;
@@ -41,6 +43,9 @@ public class TesteConfig implements CommandLineRunner {
 
 	@Autowired
 	private  ProductRepository pr;
+	
+	@Autowired
+	private OrderItemRepository oir;
 	
 	// Vamos instanciar objetos e salvar no nosso banco de dados h2
 	@Override
@@ -89,6 +94,14 @@ public class TesteConfig implements CommandLineRunner {
 		p5.getCategories().add(cat2);
 		//Salvando novamente o produto , porem com as associacoes
 		pr.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
+		
+		// Seed orderItem
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+		
+		oir.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 	}
 
 }

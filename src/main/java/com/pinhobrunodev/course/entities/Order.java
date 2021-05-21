@@ -2,6 +2,8 @@ package com.pinhobrunodev.course.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,9 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pinhobrunodev.course.entities.enums.OrderStatus;
 
 @Entity
@@ -28,8 +32,7 @@ public class Order implements Serializable {
 	// Garantir que entre no ISO 8601
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant moment;
-	
-	
+
 	// Gravando no banco um numero inteiro(somente na classe Order)
 	private Integer orderStatus;
 
@@ -38,6 +41,11 @@ public class Order implements Serializable {
 	// nome da chave estrangeira que vai relacionar
 	@JoinColumn(name = "client_id")
 	private User client;
+	
+	
+	// id.order , pois no OrdermItem eu tenho o id, e o id que possui atributo order
+	@OneToMany(mappedBy = "id.order")
+	private Set<OrderItem> items = new HashSet<>();
 
 	public Order() {
 
@@ -77,13 +85,17 @@ public class Order implements Serializable {
 	}
 
 	public void setOrderStatus(OrderStatus orderStatus) {
-		if(orderStatus != null) {
+		if (orderStatus != null) {
 			this.orderStatus = orderStatus.getCode();
 		}
 	}
 
 	public void setClient(User client) {
 		this.client = client;
+	}
+
+	public Set<OrderItem> getItems() {
+		return items;
 	}
 
 	@Override

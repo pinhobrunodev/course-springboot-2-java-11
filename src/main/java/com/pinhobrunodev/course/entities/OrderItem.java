@@ -6,6 +6,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pinhobrunodev.course.entities.pk.OrderItemPK;
 
 @Entity
@@ -15,7 +16,7 @@ public class OrderItem implements Serializable {
 
 	// Atributo identificador
 	@EmbeddedId // => Referencia a classe embedded
-	private OrderItemPK id;
+	private OrderItemPK id = new OrderItemPK();
 	
 	private Integer quantity;
 	private Double price;
@@ -27,12 +28,15 @@ public class OrderItem implements Serializable {
 	public OrderItem(Order order, Product product, Integer quantity, Double price) {
 		super();
 		// Instanciando o orderItem passando o pedido , produto quantidade e price
+		// Estou setando no meu OrderItemPK o valor dos objetos que serao inseridos no OrderItem
 		id.setOrder(order);
 		id.setProduct(product);
 		this.quantity = quantity;
 		this.price = price;
 	}
-
+	
+	// Pois era ele que estava chamando
+	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
 	}
