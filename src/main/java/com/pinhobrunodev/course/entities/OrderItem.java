@@ -28,14 +28,14 @@ public class OrderItem implements Serializable {
 	public OrderItem(Order order, Product product, Integer quantity, Double price) {
 		super();
 		// Instanciando o orderItem passando o pedido , produto quantidade e price
-		// Estou setando no meu OrderItemPK o valor dos objetos que serao inseridos no OrderItem
+		// Estou setando no meu OrderItemPK o valor dos objetos que serao inseridos no construtor do OrderItem
 		id.setOrder(order);
 		id.setProduct(product);
 		this.quantity = quantity;
 		this.price = price;
 	}
 	
-	// Pois era ele que estava chamando
+	// Pois era ele que estava chamando novamente o order do construtor
 	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
@@ -44,7 +44,8 @@ public class OrderItem implements Serializable {
 	public void setOrder(Order order) {
 		id.setOrder(order);
 	}
-
+	
+	
 	public Product getProduct() {
 		return id.getProduct();
 	}
