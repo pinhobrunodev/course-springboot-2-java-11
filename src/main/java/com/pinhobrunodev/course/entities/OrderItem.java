@@ -35,6 +35,7 @@ public class OrderItem implements Serializable {
 		this.price = price;
 	}
 	
+	
 	// Pois era ele que estava chamando novamente o order do construtor
 	@JsonIgnore
 	public Order getOrder() {
@@ -71,6 +72,13 @@ public class OrderItem implements Serializable {
 		this.price = price;
 	}
 
+	// GET => Para entrar no json
+	
+	public Double getSubTotal() {
+		return quantity * price;
+	}
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

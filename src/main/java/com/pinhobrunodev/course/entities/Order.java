@@ -111,6 +111,20 @@ public class Order implements Serializable {
 		return items;
 	}
 
+	
+	/*
+	 * Para cada valor de x do tipo OrderItem dentro da lista de items
+	 * irei somar o seu subtotal e armazenar na variavel sum
+	 */
+
+	public Double getTotal() {
+		double sum = 0.0;
+		for(OrderItem x : items) {
+			sum+=x.getSubTotal();
+		}
+		return sum;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

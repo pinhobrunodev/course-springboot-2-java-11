@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_payment")
@@ -31,6 +32,7 @@ public class Payment implements Serializable {
 	private Instant moment;
 	
 	// na classe dependente coloca isso
+	@JsonIgnore
 	@OneToOne
 	@MapsId
 	private Order order;
