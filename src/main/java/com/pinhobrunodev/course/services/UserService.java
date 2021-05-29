@@ -25,6 +25,13 @@ public class UserService {
 	return ur.save(entity);
 	}
 	
+	
+	// Deletar
+	
+	public void delete(Long id) {
+		ur.deleteById(id);
+	}
+	
 	// Retornando todos os dados da tabela
 	public List<User> findAll(){
 		return ur.findAll();
