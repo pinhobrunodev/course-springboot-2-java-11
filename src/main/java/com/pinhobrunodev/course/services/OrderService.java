@@ -18,6 +18,11 @@ public class OrderService {
 	@Autowired
 	private OrderRepository ur;
 	
+	
+	
+	
+	
+	
 	// Retornando todos os dados da tabela
 	public List<Order> findAll(){
 		return ur.findAll();

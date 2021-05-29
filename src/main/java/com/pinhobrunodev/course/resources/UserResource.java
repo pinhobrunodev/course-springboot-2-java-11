@@ -1,14 +1,18 @@
 package com.pinhobrunodev.course.resources;
 // testar o REST 
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.pinhobrunodev.course.entities.User;
 import com.pinhobrunodev.course.services.UserService;
@@ -26,6 +30,18 @@ public class UserResource {
 	
 	@Autowired
 	private UserService us;
+	
+	
+	
+	// Salvando
+	// Usamos o @RequestBody pois vai receber um obj para ser salvo
+	@PostMapping
+	public ResponseEntity<User> save(@RequestBody User entity){
+		// Gerar o endereco para informar que foi uma insercao com codigo 201
+		URI uri=ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(entity.getId()).toUri();
+		entity = us.save(entity);
+		return ResponseEntity.created(uri).body(entity);
+	}
 	
 	//Metodo de endpoint para acessar Usuarios
 	// Responde uma requisicao do tipo GET

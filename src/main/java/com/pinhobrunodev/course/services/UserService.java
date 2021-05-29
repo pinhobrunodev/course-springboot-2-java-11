@@ -18,6 +18,13 @@ public class UserService {
 	@Autowired
 	private UserRepository ur;
 	
+	
+	
+	// Salvando
+	public User save(User entity) {
+	return ur.save(entity);
+	}
+	
 	// Retornando todos os dados da tabela
 	public List<User> findAll(){
 		return ur.findAll();
