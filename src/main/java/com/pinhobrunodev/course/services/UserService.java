@@ -25,7 +25,23 @@ public class UserService {
 	return ur.save(entity);
 	}
 	
+	//Atualizado
+	// ID QUE VAI SER ATUALIZADO E OS DADOS QUE VAO SER ATUALIZADOS
+	public User update(Long id,User valorRecebido) {
+		// getOne() , instancia o usuario mas nao vai no banco de dados, so deixa o obj MONITORADO pelo JPA
+		User valorMonitoriado = ur.getOne(id); // Vai esta instanciado com o objeto referente ao ID informado
+		updateData(valorMonitoriado,valorRecebido);
+		return ur.save(valorMonitoriado);
+	}
 	
+	
+	private void updateData(User valorMonitoriado, User valorRecebido) {
+		// Sem att ID e Senha
+		valorMonitoriado.setName(valorRecebido.getName());
+		valorMonitoriado.setEmail(valorRecebido.getEmail());
+		valorMonitoriado.setFone(valorRecebido.getFone());
+	}
+
 	// Deletar
 	
 	public void delete(Long id) {
